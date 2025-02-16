@@ -1,3 +1,4 @@
+TASK --1
 # Counter Token (CTR)
 
 A simple ERC20 token implementation built with Solidity and OpenZeppelin.
@@ -221,3 +222,257 @@ During the development of the Counter Token project, several challenges and issu
    - Added automated documentation generation
 
 These issues and their solutions have been documented to help future developers avoid similar problems and streamline the development process.
+
+
+
+
+
+
+
+
+TASK -- 2
+
+
+
+
+
+# MyNFT (MNFT) Smart Contract
+
+A customizable ERC721 NFT implementation with ownership controls and metadata management.
+
+## Overview
+
+MyNFT is an ERC721-compliant Non-Fungible Token (NFT) built on the Ethereum blockchain. The contract includes minting functionality with owner controls and customizable metadata URI support.
+
+## Features
+
+- 🎨 ERC721 compliant NFT
+- 🔐 Ownable contract with access controls
+- 📝 Customizable metadata URI
+- 🔄 Sequential token ID generation
+- 🛠 Built using OpenZeppelin contracts
+- ✅ Comprehensive test coverage
+- 📦 Foundry-based deployment scripts
+
+## Technical Details
+
+### Contract Specifications
+
+- Token Name: MyNFT
+- Token Symbol: MNFT
+- Framework: Foundry
+- Solidity Version: ^0.8.19
+- License: MIT
+- Dependencies: OpenZeppelin Contracts
+
+## Project Structure
+
+```
+├── src/
+│   └── Counter.sol         # Main NFT contract
+├── script/
+│   └── Counter.s.sol      # Deployment script
+└── test/
+    └──Counter.t.sol       # Test suite
+```
+
+## Smart Contracts
+
+### MyNFT.sol
+
+The main NFT contract inherits from OpenZeppelin's ERC721 and Ownable implementations:
+
+```solidity
+contract MyNFT is ERC721, Ownable {
+    using Counters for Counters.Counter;
+    Counters.Counter private _tokenIdCounter;
+
+    string private _baseTokenURI;
+
+    constructor(string memory baseURI) ERC721("MyNFT", "MNFT") {
+        _baseTokenURI = baseURI;
+    }
+    
+    // ... additional functions
+}
+```
+
+### Key Functions
+
+- `mint(address to)`: Mints a new NFT to the specified address (owner only)
+- `setBaseURI(string memory baseURI)`: Updates the base URI for token metadata (owner only)
+- `totalSupply()`: Returns the total number of minted NFTs
+- `_baseURI()`: Internal function that returns the base URI for token metadata
+
+## Development Setup
+
+1. Install Foundry:
+```bash
+curl -L https://foundry.paradigm.xyz | bash
+foundryup
+```
+
+2. Clone the repository:
+```bash
+git clone <repository-url>
+cd mynft-contract
+```
+
+3. Install dependencies:
+```bash
+forge install
+```
+
+4. Build the project:
+```bash
+forge build
+```
+
+## Testing
+
+The project includes a comprehensive test suite using Foundry's testing framework. Tests verify:
+
+- NFT minting functionality
+- Ownership controls
+- Metadata URI management
+- Token supply tracking
+
+To run tests:
+
+```bash
+forge test
+```
+
+## Deployment
+
+The deployment script (`DeployMyNFT.s.sol`) handles the deployment process:
+
+```bash
+forge script script/DeployMyNFT.s.sol --rpc-url <your-rpc-url> --broadcast
+```
+
+### Configuration
+
+Before deployment, ensure:
+1. Your RPC URL is configured
+2. Your deployer wallet has sufficient ETH
+3. The desired metadata base URI is set in the deployment script
+
+## Metadata
+
+### Format
+
+Token metadata should follow the OpenSea metadata standard:
+
+```json
+{
+    "name": "Asset Name",
+    "description": "Asset Description",
+    "image": "ipfs://QmImage/1.png",
+    "attributes": [
+        {
+            "trait_type": "Property",
+            "value": "Value"
+        }
+    ]
+}
+```
+
+### IPFS Integration
+
+1. Prepare your metadata JSON files
+2. Upload to IPFS using your preferred service
+3. Set the base URI to your IPFS folder CID
+
+## Security Features
+
+- OpenZeppelin's battle-tested contracts
+- Access control via Ownable
+- Safe minting implementation
+- Sequential token ID generation
+- Upgradeable metadata URI
+
+## Best Practices
+
+1. **Metadata Management**
+   - Store metadata on IPFS for decentralization
+   - Use consistent naming conventions
+   - Include comprehensive attributes
+
+2. **Minting**
+   - Implement batch minting for gas efficiency
+   - Consider adding mint limits
+   - Include mint pricing if required
+
+3. **Testing**
+   - Test all owner functions
+   - Verify metadata URI updates
+   - Check access controls
+
+## Contributing
+
+1. Fork the repository
+2. Create your feature branch (`git checkout -b feature/amazing-feature`)
+3. Commit your changes (`git commit -m 'Add some amazing feature'`)
+4. Push to the branch (`git push origin feature/amazing-feature`)
+5. Open a Pull Request
+
+## License
+
+This project is licensed under the MIT License - see the LICENSE file for details.
+
+
+
+## Acknowledgments
+
+- OpenZeppelin for providing secure, standard contract implementations
+- Foundry team for the development framework
+- IPFS for decentralized metadata storage
+
+  # MyNFT (MNFT) Smart Contract
+
+A customizable ERC721 NFT implementation with ownership controls and metadata management.
+
+[Previous sections remain unchanged...]
+
+## Development Challenges and Solutions
+
+During the development of this NFT project, several significant challenges were encountered and resolved:
+
+### Environment Setup Issues
+
+1. **Foundry Installation Challenges**
+   - Permission denied errors during installation script execution
+   - Resolution: Used sudo permissions or manual installation through GitHub releases
+   - Version compatibility issues between different Foundry components required careful version management
+
+2. **OpenZeppelin Integration**
+   - Initial contract compilation failed due to version mismatches
+   - Solidity version conflicts between OpenZeppelin (^0.8.19) and project setup
+   - Resolved by aligning project's solidity version with OpenZeppelin requirements
+
+### Smart Contract Development
+
+1. **Contract Inheritance**
+   - Multiple inheritance conflicts between ERC721 and Ownable
+   - Gas optimization issues in the minting function
+   - Resolved through proper contract structuring and OpenZeppelin's safe implementation
+
+2. **Metadata URI Management**
+   - IPFS integration challenges for metadata storage
+   - Base URI updates not reflecting immediately
+   - Implemented proper URI management with owner controls
+
+### Testing Framework
+
+1. **Test Environment**
+   - Initial setup issues with Foundry's testing framework
+   - Gas estimation failures during test execution
+   - Resolved by adjusting gas limits and implementing proper test configurations
+
+2. **Contract Verification**
+   - Challenges in automated contract verification
+   - Issues with constructor arguments handling
+   - Implemented robust deployment scripts with proper argument management
+
+These challenges led to several key improvements in the project structure and implementation, resulting in a more robust and secure NFT contract.
